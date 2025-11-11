@@ -22,6 +22,8 @@ jobs:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_PYTHON: true
+          VALIDATE_JS: true
+          VALIDATE_TS: true
           
   Bandit:
     runs-on: ubuntu-latest
