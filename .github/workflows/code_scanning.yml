@@ -31,7 +31,7 @@ jobs:
         run: pip install bandit
 
       - name: Run Bandit
-        uses: shundor/bandit-action@v1
+        uses: shundor/python-bandit-scan@v1.0
         with: 
           path: "."
           level: high
