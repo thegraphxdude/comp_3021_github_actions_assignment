@@ -1,0 +1,39 @@
+
+name: "Code Scanning"
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  Analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Initialize CodeQl
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+          
+      - name: CodeQl Analysis
+        uses: github/codeql-action/analyze@v3
+
+      - name: Run Super-linter
+        uses: super-linter/super-linter@v7.1.0
+        env:
+          # To report GitHub Actions status checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_PYTHON: true
+          
+      - name: Install Bandit
+        run: pip install bandit
+
+      - name: Run Bandit
+        uses: shundor/bandit-action@v1
+        with: 
+          path: "."
+          level: high
+          confidence: high
+          exit_zero: true           
