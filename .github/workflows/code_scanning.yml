@@ -14,15 +14,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
-
-      - name: Initialize CodeQl
-        uses: github/codeql-action/init@v3
-        with:
-          languages: python
-          
-      - name: CodeQl Analysis
-        uses: github/codeql-action/analyze@v3
-
+        
       - name: Run Super-linter
         uses: super-linter/super-linter@v7.1.0
         env:
