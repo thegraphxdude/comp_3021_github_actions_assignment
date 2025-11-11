@@ -34,9 +34,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Install Bandit
-        run: pip install bandit
-        
       - name: Run Bandit
         uses: shundor/python-bandit-scan@v1.0
         with: 
