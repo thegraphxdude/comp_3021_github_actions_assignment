@@ -9,7 +9,7 @@ jobs:
   Analysis:
     runs-on: ubuntu-latest
     permissions:
-      content: read
+      contents: read
       security-events: write
     steps:
       - name: Checkout code
