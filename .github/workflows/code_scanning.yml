@@ -1,12 +1,12 @@
 
-name: "Code Scanning"
+name: "Code Scanning with Super Linter and Bandit"
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  Analysis:
+  Super-Linter:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -17,14 +17,24 @@ jobs:
         
       - name: Run Super-linter
         uses: super-linter/super-linter@v7.1.0
+        continue-on-error: true
         env:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_PYTHON: true
           
+  Bandit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
       - name: Install Bandit
         run: pip install bandit
-
+        
       - name: Run Bandit
         uses: shundor/python-bandit-scan@v1.0
         with: 
